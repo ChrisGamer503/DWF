@@ -77,9 +77,10 @@ DELETE - /api/books/{id} - Delete a book by ID
 
 ## Example JSON for POST /api/books
 
-`{`
-`  "title": "Clean Code",`
-`  "author": "Robert C. Martin",`
-`  "publicationYear": 2008`
-`}`
+```
+{
+  "title": "Clean Code",
+  "author": "Robert C. Martin",
+  "publicationYear": 2008
+}`
 
