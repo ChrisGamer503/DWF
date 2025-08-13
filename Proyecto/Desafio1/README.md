@@ -42,16 +42,16 @@ The API allows you to list all books, add a new book, search books by title, and
 3. Create the database in MySQL:
 `CREATE DATABASE bookdb;`
 4. Configure database connection in src/main/resources/application.properties:
-`spring.datasource.url=jdbc:mysql://localhost:3306/bookdb?useSSL=false&serverTimezone=UTC
-spring.datasource.username=root
-spring.datasource.password=root
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-server.port=8080
-spring.application.name=Desafio1`
+`spring.datasource.url=jdbc:mysql://localhost:3306/bookdb?useSSL=false&serverTimezone=UTC`
+`spring.datasource.username=root`
+`spring.datasource.password=root`
+`spring.jpa.hibernate.ddl-auto=update`
+`spring.jpa.show-sql=true`
+`server.port=8080`
+`spring.application.name=Desafio1`
 5. Build and run the application:
-`mvn clean install
-mvn spring-boot:run`
+`mvn clean install`
+`mvn spring-boot:run`
 6. Access the API at:
 `http://localhost:8080/api/books`
 
@@ -68,9 +68,9 @@ DELETE - /api/books/{id} - Delete a book by ID
 
 ## Example JSON for POST /api/books
 
-{
-  "title": "Clean Code",
-  "author": "Robert C. Martin",
-  "publicationYear": 2008
-}
+`{`
+`  "title": "Clean Code",`
+`  "author": "Robert C. Martin",`
+`  "publicationYear": 2008`
+`}`
 
