@@ -59,9 +59,13 @@ The API allows you to list all books, add a new book, search books by title, and
 
 ## API Endpoints
 Method - Endpoint - Description
+
 GET -	/api/books - List all books
+
 POST - /api/books - Add a new book (JSON body required)
+
 GET - /api/books/search?title={title} - Search books by title
+
 DELETE - /api/books/{id} - Delete a book by ID
 
 ---
