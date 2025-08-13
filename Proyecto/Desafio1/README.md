@@ -37,10 +37,13 @@ The API allows you to list all books, add a new book, search books by title, and
 
 1. Clone the repository:
 `git clone https://github.com/ChrisGamer503/DWF.git`
+
 2. Navigate to the project folder:
 `cd DWF/Proyecto/Desafio1`
+
 3. Create the database in MySQL:
 `CREATE DATABASE bookdb;`
+
 4. Configure database connection in src/main/resources/application.properties:
 `spring.datasource.url=jdbc:mysql://localhost:3306/bookdb?useSSL=false&serverTimezone=UTC`
 `spring.datasource.username=root`
@@ -49,9 +52,11 @@ The API allows you to list all books, add a new book, search books by title, and
 `spring.jpa.show-sql=true`
 `server.port=8080`
 `spring.application.name=Desafio1`
+
 5. Build and run the application:
 `mvn clean install`
 `mvn spring-boot:run`
+
 6. Access the API at:
 `http://localhost:8080/api/books`
 
