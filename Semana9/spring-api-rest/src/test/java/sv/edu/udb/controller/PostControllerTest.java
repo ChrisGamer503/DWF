@@ -40,6 +40,9 @@ class PostControllerTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(postController).build();
         this.objectMapper = new ObjectMapper();
 
+        // 👇 Esta línea es clave para evitar el error con LocalDate
+        this.objectMapper.findAndRegisterModules();
+
         this.post = Post.builder()
                 .id(1L)
                 .title("testing post")

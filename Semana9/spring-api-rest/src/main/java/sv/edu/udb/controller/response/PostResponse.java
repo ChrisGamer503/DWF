@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldNameConstants;
 import java.time.LocalDate;
+
 @Getter
 @Setter
 @Builder(toBuilder = true) //Es para poder modificar el objeto luego de creado
