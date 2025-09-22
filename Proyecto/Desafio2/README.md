@@ -1,27 +1,44 @@
-# Desafio 1 - Book API
+# Desafio 2 - User, Book & Subscription API
 
-This is a REST API built with **Spring Boot** for managing a book catalog for the fictional publisher "Letras Vivas".  
-The API allows you to list all books, add a new book, search books by title, and delete books.
+This is a RESTful API built with **Spring Boot** for managing users, books, and subscriptions.
+It provides a professional structure for CRUD operations, input validation, centralized error handling, pagination, and API documentation via **OpenAPI/Swagger**.
+This project is an evolution of the previous Book API (Desafio 1), now supporting multi-entity management and better integration for external clients.
 
 ---
 
 ## Features
-- List all books
-- Add a new book
-- Search books by title
-- Delete a book
-- Input validation (title, author, publication year)
+- Users
+  * Create, read, update, delete users
+  * Input validation (first name, last name, email)
+  * Pagination support
+- Books
+  * Create, read, update, delete books
+  * Search books by title
+  * Input validation (title, author, publication year)
+  * Pagination support
+- Subscriptions
+  * Create, read, update, delete subscriptions
+  * Fetch subscriptions by user ID
+  * Input validation (type, start date, end date, user association)
+  * Pagination support
+- Global Error Handling
+  * Consistent JSON responses for validation errors, resource not found, and internal server errors
+- API Documentation
+  * Swagger UI / OpenAPI integration
+- Unit Testing
+  * JUnit + Spring Boot Test examples for service layer
 
 ---
 
 ## Technologies
 - Java 17
-- Spring Boot
-- Spring Data JPA
+- Spring Boot 3.5+
+- Spring Data JPA + Hibernate
 - MySQL
 - Lombok
-- Validation with `javax.validation` / `jakarta.validation`
-- Swagger/OpenAPI (if included)
+- Validation with `jakarta.validation`
+- SpringDoc OpenAPI (Swagger UI)
+- Maven
 
 ---
 
@@ -39,7 +56,7 @@ The API allows you to list all books, add a new book, search books by title, and
 `git clone https://github.com/ChrisGamer503/DWF.git`
 
 2. Navigate to the project folder:
-`cd DWF/Proyecto/Desafio1`
+`cd DWF/Proyecto/Desafio2`
 
 3. Create the database in MySQL:
 `CREATE DATABASE bookdb;`
@@ -60,29 +77,110 @@ spring.application.name=Desafio1
 `mvn spring-boot:run`
 
 6. Access the API at:
-`http://localhost:8080/api/books`
+- Base URL: `http://localhost:8080/api`
+- Swagger UI: `http://localhost:8080/swagger-ui/index.html`
 
 ---
 
 ## API Endpoints
-Method - Endpoint - Description
+- Users
 
-GET -	/api/books - List all books
+| Method | Endpoint           | Description               |
+| ------ | ------------------ | ------------------------- |
+| GET    | `/api/users`       | Get all users             |
+| GET    | `/api/users/paged` | Get users with pagination |
+| GET    | `/api/users/{id}`  | Get a user by ID          |
+| POST   | `/api/users`       | Create a new user         |
+| PUT    | `/api/users/{id}`  | Update a user             |
+| DELETE | `/api/users/{id}`  | Delete a user             |
 
-POST - /api/books - Add a new book (JSON body required)
+- Books
 
-GET - /api/books/search?title={title} - Search books by title
+| Method | Endpoint                   | Description               |
+| ------ | -------------------------- | ------------------------- |
+| GET    | `/api/books`               | Get all books             |
+| GET    | `/api/books/paged`         | Get books with pagination |
+| GET    | `/api/books/{id}`          | Get a book by ID          |
+| GET    | `/api/books/search?title=` | Search books by title     |
+| POST   | `/api/books`               | Create a new book         |
+| PUT    | `/api/books/{id}`          | Update a book             |
+| DELETE | `/api/books/{id}`          | Delete a book             |
 
-DELETE - /api/books/{id} - Delete a book by ID
+- Subscriptions
+
+| Method | Endpoint                           | Description                       |
+| ------ | ---------------------------------- | --------------------------------- |
+| GET    | `/api/subscriptions`               | Get all subscriptions             |
+| GET    | `/api/subscriptions/paged`         | Get subscriptions with pagination |
+| GET    | `/api/subscriptions/user/{userId}` | Get subscriptions by user ID      |
+| POST   | `/api/subscriptions`               | Create a new subscription         |
+| PUT    | `/api/subscriptions/{id}`          | Update a subscription             |
+| DELETE | `/api/subscriptions/{id}`          | Delete a subscription             |
+
 
 ---
 
-## Example JSON for POST /api/books
 
+
+## Example JSON Requests
+
+- Create User
+POST /api/users
 ```
 {
-  "title": "Clean Code",
-  "author": "Robert C. Martin",
-  "publicationYear": 2008
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com"
 }`
 
+```
+
+- Create Book
+POST /api/books
+```
+{
+  "title": "Spring Boot in Action",
+  "author": "Craig Walls",
+  "publicationYear": 2020
+}`
+
+```
+
+- Create Subscription
+POST /api/subscriptions
+```
+{
+  "type": "Premium",
+  "startDate": "2025-09-21",
+  "endDate": "2025-12-21",
+  "userId": 1
+}`
+
+```
+
+- Error Handling
+All errors return a **consistent JSON response**:
+```
+{
+  "status": 400,
+  "error": "Bad Request",
+  "message": "Validation failed for one or more fields",
+  "fieldErrors": {
+    "email": "Email must be valid",
+    "firstName": "First name is required"
+  },
+  "timestamp": "2025-09-21T20:30:00"
+}`
+
+```
+
+- Testing
+  * **Unit Testing (JUnit + Spring Boot Test)** for service layer
+  * **Integration testing** via Swagger UI or Postman
+  * Run tests with Maven: mvn test
+ 
+## Notes
+
+- All code is written in English.
+- Pagination and sorting are available on all main entities (/paged endpoints).
+- Centralized error handling ensures uniform JSON responses for clients.
